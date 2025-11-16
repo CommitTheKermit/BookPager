@@ -21,8 +21,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.friendshiphyun.bookpager.ui.theme.commonWhite
-import com.friendshiphyun.bookpager.ui.theme.primaryMain
+import com.friendshiphyun.bookpager.ui.theme.Colors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -32,7 +31,7 @@ fun MainAppBar() {
         TopAppBar(title = {
             Text(
                 "페이져",
-                color = primaryMain,
+                color = Colors.primaryMain,
                 fontWeight = FontWeight.ExtraBold
             )
         }, actions = {
@@ -40,7 +39,7 @@ fun MainAppBar() {
             Box(
                 modifier = Modifier
                     .background(
-                        color = primaryMain,
+                        color = Colors.primaryMain,
                         shape = CircleShape
                     )
                     .padding(4.dp)
@@ -49,7 +48,7 @@ fun MainAppBar() {
                 Icon(
                     imageVector = Icons.Default.Check,
                     contentDescription = "연결 상태",
-                    tint = commonWhite,
+                    tint = Colors.commonWhite,
                 )
             }
 
