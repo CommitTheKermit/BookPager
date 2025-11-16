@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.friendshiphyun.bookpager.ui.schedule.ScheduleDialog
 import com.friendshiphyun.bookpager.ui.schedule.ScheduleList
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
@@ -16,6 +17,8 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 @Preview
 @Composable
 fun MainScreen() {
+    var showScheduleDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             MainAppBar()
@@ -31,7 +34,15 @@ fun MainScreen() {
 
             ScheduleList(
                 schedules = emptyList(),
+                onDialog = { showScheduleDialog = true }
             )
+            HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
         }
+    }
+
+    if (showScheduleDialog) {
+        ScheduleDialog(
+            onDismiss = { showScheduleDialog = false }
+        )
     }
 }

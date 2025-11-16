@@ -25,6 +25,7 @@ import java.time.LocalTime
 @Preview(showBackground = true)
 fun ScheduleList(
     schedules: List<Schedule> = emptyList(),
+    onDialog: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier.padding(vertical = 15.dp, horizontal = 20.dp)
@@ -36,7 +37,7 @@ fun ScheduleList(
         ) {
             Text("페이지 턴 일정")
             Button(
-                onClick = { },
+                onClick = { onDialog() },
                 modifier = Modifier.height(32.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Colors.primaryMain
