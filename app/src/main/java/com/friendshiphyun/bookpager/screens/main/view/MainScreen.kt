@@ -29,6 +29,12 @@ fun MainScreen() {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            // WiFi 상태 카드
+            WifiStatusCard(
+                isConnected = true,
+                wifiName = "SK_WiFiA5E0"
+            )
+
             ManualPager()
             HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
 
