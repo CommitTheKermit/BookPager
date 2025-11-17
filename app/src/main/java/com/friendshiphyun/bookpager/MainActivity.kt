@@ -3,7 +3,7 @@ package com.friendshiphyun.bookpager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.friendshiphyun.bookpager.ui.MainScreen
+import com.friendshiphyun.bookpager.screens.main.view.MainScreen
 import com.friendshiphyun.bookpager.ui.theme.BookPagerTheme
 
 /**

@@ -1,4 +1,4 @@
-package com.friendshiphyun.bookpager.model
+package com.friendshiphyun.bookpager.screens.main.model
 
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter

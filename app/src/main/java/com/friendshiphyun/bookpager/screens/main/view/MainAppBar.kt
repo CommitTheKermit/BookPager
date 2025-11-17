@@ -1,4 +1,4 @@
-package com.friendshiphyun.bookpager.ui
+package com.friendshiphyun.bookpager.screens.main.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

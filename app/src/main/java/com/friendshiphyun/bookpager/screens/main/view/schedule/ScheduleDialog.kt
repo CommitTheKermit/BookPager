@@ -1,4 +1,4 @@
-package com.friendshiphyun.bookpager.ui.schedule
+package com.friendshiphyun.bookpager.screens.main.view.schedule
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.friendshiphyun.bookpager.model.Schedule
+import com.friendshiphyun.bookpager.screens.main.model.Schedule
 import com.friendshiphyun.bookpager.ui.theme.Colors
 import java.time.LocalTime
 
