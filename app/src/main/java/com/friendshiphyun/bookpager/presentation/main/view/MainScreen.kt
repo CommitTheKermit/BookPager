@@ -46,7 +46,10 @@ fun MainScreen(
                 wifiName = "SK_WiFiA5E0"
             )
 
-            ManualPager()
+            ManualPager(
+                onButtonClick = { frameViewModel.turnPage() },
+                isLoading = uiState.isLoading
+            )
             HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
 
             ScheduleList(

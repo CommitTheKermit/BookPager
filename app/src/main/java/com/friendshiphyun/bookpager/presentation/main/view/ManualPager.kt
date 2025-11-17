@@ -23,13 +23,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
-@Preview
 @Composable
-fun ManualPager() {
+fun ManualPager(
+    onButtonClick: () -> Unit,
+    isLoading: Boolean,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,8 +38,7 @@ fun ManualPager() {
             .background(
                 color = Colors.primarySub, shape = RoundedCornerShape(12.dp)
             )
-    )
-    {
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -53,7 +53,7 @@ fun ManualPager() {
 
             )
             Button(
-                onClick = {},
+                onClick = { onButtonClick() },
                 enabled = true,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -63,19 +63,16 @@ fun ManualPager() {
 
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Colors.primaryMain,
-                    contentColor = Color.White
+                    containerColor = Colors.primaryMain, contentColor = Color.White
                 )
             ) {
-                if (false) {
+                if (isLoading) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
+                        modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.onPrimary
                     )
                 } else {
                     Icon(
-                        Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null
+                        Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("넘기기", style = MaterialTheme.typography.titleMedium)

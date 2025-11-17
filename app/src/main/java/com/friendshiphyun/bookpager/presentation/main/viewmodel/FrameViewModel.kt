@@ -45,4 +45,29 @@ class FrameViewModel(
         }
     }
 
+    fun turnPage() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, message = "") }
+
+            repository.turnPage()
+                .onSuccess { message ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            message = message,
+                            isConnected = true
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            message = "연결 실패: ${error.message}",
+                            isConnected = false
+                        )
+                    }
+                }
+        }
+    }
 }
