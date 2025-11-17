@@ -1,4 +1,4 @@
-package com.friendshiphyun.bookpager.screens.main.view
+package com.friendshiphyun.bookpager.presentation.main.view
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -6,8 +6,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.friendshiphyun.bookpager.screens.main.view.schedule.ScheduleDialog
-import com.friendshiphyun.bookpager.screens.main.view.schedule.ScheduleList
+import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleDialog
+import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleList
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
 /**

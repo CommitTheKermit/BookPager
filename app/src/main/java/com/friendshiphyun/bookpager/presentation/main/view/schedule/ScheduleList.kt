@@ -1,4 +1,4 @@
-package com.friendshiphyun.bookpager.screens.main.view.schedule
+package com.friendshiphyun.bookpager.presentation.main.view.schedule
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.friendshiphyun.bookpager.screens.main.model.Schedule
+import com.friendshiphyun.bookpager.domain.model.Schedule
 import com.friendshiphyun.bookpager.ui.theme.Colors
 import java.time.LocalTime
 
