@@ -42,8 +42,8 @@ fun MainScreen(
         ) {
             // WiFi 상태 카드
             WifiStatusCard(
-                isConnected = true,
-                wifiName = "SK_WiFiA5E0"
+                isConnected = uiState.isConnected,
+                wifiName = uiState.esp32Status?.wifi,
             )
 
             ManualPager(
