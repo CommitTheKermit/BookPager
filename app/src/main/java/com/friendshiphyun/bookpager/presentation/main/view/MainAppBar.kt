@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -18,15 +19,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun MainAppBar() {
+fun MainAppBar(
+    onRefresh: () -> Unit,
+    isEnabled: Boolean = false,
+) {
     Column {
         TopAppBar(title = {
             Text(
@@ -39,20 +43,20 @@ fun MainAppBar() {
             Box(
                 modifier = Modifier
                     .background(
-                        color = Colors.primaryMain,
+                        color = if(isEnabled) Colors.primaryMain else Color.Red,
                         shape = CircleShape
                     )
                     .padding(4.dp)
                     .size(20.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Check,
+                    imageVector = if (isEnabled) Icons.Default.Check else Icons.Default.ErrorOutline,
                     contentDescription = "연결 상태",
                     tint = Colors.commonWhite,
                 )
             }
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = { onRefresh() }) {
                 Icon(Icons.Filled.Refresh, contentDescription = "상태 확인")
             }
         })

@@ -6,8 +6,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleDialog
 import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleList
+import com.friendshiphyun.bookpager.presentation.main.viewmodel.FrameViewModel
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
 /**
@@ -16,12 +18,21 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    frameViewModel: FrameViewModel = viewModel()
+
+) {
     var showScheduleDialog by remember { mutableStateOf(false) }
+    val uiState by frameViewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
-            MainAppBar()
+            MainAppBar(
+                onRefresh = {
+                    frameViewModel.checkStatus()
+                },
+                isEnabled = uiState.isConnected
+            )
         },
     ) { paddingValues ->
         Column(
