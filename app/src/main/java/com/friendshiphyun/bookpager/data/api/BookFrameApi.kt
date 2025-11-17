@@ -1,8 +1,13 @@
 package com.friendshiphyun.bookpager.data.api
 
+import com.friendshiphyun.bookpager.data.api.dto.request.MotorControlRequest
+import com.friendshiphyun.bookpager.data.api.dto.response.MotorControlResponse
 import com.friendshiphyun.bookpager.data.api.dto.response.StatusResponse
+import com.friendshiphyun.bookpager.data.api.dto.response.TurnResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface BookFrameApi {
     /**
@@ -10,4 +15,10 @@ interface BookFrameApi {
      */
     @GET("status")
     suspend fun getStatus(): Response<StatusResponse>
+
+    /**
+     * 페이지 넘기기
+     */
+    @POST("turn")
+    suspend fun turnPage(): Response<TurnResponse>
 }
