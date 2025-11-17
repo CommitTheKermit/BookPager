@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 
 /**
  * Light 테마 색상 정의 (Material3 ColorScheme)
+ * Dark 테마는 사용 X
  */
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF1E4A75),           // 메인 색상 (다크 블루)

@@ -11,7 +11,7 @@ import com.friendshiphyun.bookpager.ui.schedule.ScheduleList
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
 /**
- * 메인 BookFrame 화면
+ * 메인 화면
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
