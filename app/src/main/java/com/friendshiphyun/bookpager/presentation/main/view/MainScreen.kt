@@ -51,6 +51,7 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
         ) {
             // WiFi 상태 카드
             WifiStatusCard(
