@@ -3,9 +3,13 @@ package com.friendshiphyun.bookpager.data.repository
 import com.friendshiphyun.bookpager.data.api.ApiClient
 import com.friendshiphyun.bookpager.data.api.BookFrameApi
 import com.friendshiphyun.bookpager.data.api.dto.request.MotorControlRequest
+import com.friendshiphyun.bookpager.data.api.dto.request.SetScheduleRequest
+import com.friendshiphyun.bookpager.data.api.dto.response.ScheduleDto
 import com.friendshiphyun.bookpager.data.api.dto.response.StatusResponse
+import com.friendshiphyun.bookpager.domain.model.Schedule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.LocalTime
 
 /**
  * BookFrame Repository
@@ -59,5 +63,54 @@ class BookFrameRepository(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    /**
+     * ESP32로부터 일정 목록 조회
+     */
+    suspend fun getSchedules(): Result<List<Schedule>> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.getStatus()
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    val schedules = body.schedules.map { it.toSchedule() }
+                    Result.success(schedules)
+                } else {
+                    Result.failure(Exception("응답 데이터가 없습니다"))
+                }
+            } else {
+                Result.failure(Exception("일정 조회 실패: ${response.code()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * ESP32에 일정 추가
+     */
+    suspend fun addSchedule(hour: Int, minute: Int): Result<String> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.setSchedule(SetScheduleRequest(hour, minute))
+            if (response.isSuccessful) {
+                val body = response.body()
+                Result.success(body?.message ?: "일정이 추가되었습니다")
+            } else {
+                Result.failure(Exception("일정 추가 실패: ${response.code()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * ScheduleDto를 Schedule 도메인 모델로 변환
+     */
+    private fun ScheduleDto.toSchedule(): Schedule {
+        return Schedule(
+            time = LocalTime.of(hour, minute),
+            isEnabled = enabled
+        )
     }
 }

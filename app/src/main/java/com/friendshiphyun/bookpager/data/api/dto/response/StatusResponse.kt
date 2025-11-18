@@ -6,6 +6,14 @@ package com.friendshiphyun.bookpager.data.api.dto.response
 data class StatusResponse(
     val connected: Boolean,
     val wifi: String,
-    val timerActive: Boolean = false,
-    val timerInterval: Int = 0
+    val hour: Int = 0,
+    val minute: Int = 0,
+    val schedules: List<ScheduleDto> = emptyList()
+)
+
+data class ScheduleDto(
+    val index: Int,
+    val hour: Int,
+    val minute: Int,
+    val enabled: Boolean
 )
