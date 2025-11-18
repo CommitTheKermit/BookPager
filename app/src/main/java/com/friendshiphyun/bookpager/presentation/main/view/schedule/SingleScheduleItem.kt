@@ -19,6 +19,8 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 @Composable
 fun SingleScheduleItem(
     schedule: Schedule,
+    onToggle: (Schedule) -> Unit = {},
+    onDelete: (Schedule) -> Unit = {}
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -29,8 +31,8 @@ fun SingleScheduleItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(
-                checked = false,
-                onCheckedChange = { }
+                checked = schedule.isEnabled,
+                onCheckedChange = { onToggle(schedule) }
             )
             Text(
                 schedule.getDisplayTime(),
@@ -39,7 +41,7 @@ fun SingleScheduleItem(
             )
         }
         IconButton(
-            onClick = {}
+            onClick = { onDelete(schedule) }
         ) {
             Icon(
                 imageVector = Icons.Default.Delete,

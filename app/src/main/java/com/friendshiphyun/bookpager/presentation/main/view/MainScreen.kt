@@ -16,6 +16,7 @@ import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleDial
 import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleList
 import com.friendshiphyun.bookpager.presentation.main.viewmodel.FrameViewModel
 import com.friendshiphyun.bookpager.presentation.main.viewmodel.MotorControlViewModel
+import com.friendshiphyun.bookpager.presentation.main.viewmodel.ScheduleViewModel
 import com.friendshiphyun.bookpager.ui.theme.Colors
 
 /**
@@ -27,11 +28,13 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 fun MainScreen(
     frameViewModel: FrameViewModel = viewModel(),
     motorControlViewModel: MotorControlViewModel = viewModel(),
+    scheduleViewModel: ScheduleViewModel = viewModel()
 ) {
     val context = LocalContext.current
     var showScheduleDialog by remember { mutableStateOf(false) }
     val uiState by frameViewModel.uiState.collectAsState()
     val motorState by motorControlViewModel.motorState.collectAsState()
+    val schedules by scheduleViewModel.schedules.collectAsState()
     val message by scheduleViewModel.message.collectAsState()
 
     LaunchedEffect(message) {
@@ -73,8 +76,8 @@ fun MainScreen(
             HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
 
             ScheduleList(
-                schedules = emptyList(),
-                onDialog = { showScheduleDialog = true }
+                schedules = schedules,
+                onDialog = { showScheduleDialog = true },
             )
             HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
             ManualControl(
@@ -87,12 +90,19 @@ fun MainScreen(
                 },
                 isLoading = motorState.isLoading
             )
+            HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
         }
     }
 
     if (showScheduleDialog) {
         ScheduleDialog(
-            onDismiss = { showScheduleDialog = false }
+            onDismiss = {
+                showScheduleDialog = false
+                scheduleViewModel.clearMessage()
+            },
+            onConfirm = { time, isEnabled ->
+                scheduleViewModel.addSchedule(time, isEnabled)
+            }
         )
     }
 }

@@ -39,7 +39,8 @@ fun ScheduleDialog(
         time = LocalTime.of(0, 0),
         isEnabled = true,
     ),
-    onDismiss: () -> Unit = {}
+    onDismiss: () -> Unit = {},
+    onConfirm: (LocalTime, Boolean) -> Unit = { _, _ -> }
 ) {
     val timePickerState = rememberTimePickerState(
         initialHour = schedule.time.hour,
@@ -102,7 +103,13 @@ fun ScheduleDialog(
         },
         confirmButton = {
             Button(
-                onClick = { onDismiss() },
+                onClick = {
+                    val selectedTime = LocalTime.of(
+                        timePickerState.hour,
+                        timePickerState.minute
+                    )
+                    onConfirm(selectedTime, isEnabled)
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Colors.primaryMain
                 )
