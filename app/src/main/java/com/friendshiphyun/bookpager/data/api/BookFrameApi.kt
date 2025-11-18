@@ -21,4 +21,10 @@ interface BookFrameApi {
      */
     @POST("turn")
     suspend fun turnPage(): Response<TurnResponse>
+
+    /**
+     * 모터 제어
+     */
+    @POST("motor")
+    suspend fun controlMotor(@Body motorControl: MotorControlRequest): Response<MotorControlResponse>
 }

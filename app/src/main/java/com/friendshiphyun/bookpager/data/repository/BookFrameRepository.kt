@@ -46,4 +46,18 @@ class BookFrameRepository(
             Result.failure(e)
         }
     }
+
+    suspend fun controlMotor(motor: Int, forward: Boolean): Result<String> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.controlMotor(MotorControlRequest(motor, forward))
+            if (response.isSuccessful) {
+                val direction = if (forward) "정방향" else "반대방향"
+                Result.success("모터 ${motor}이(가) ${direction}으로 회전했습니다")
+            } else {
+                Result.failure(Exception("모터 제어 실패: ${response.code()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
