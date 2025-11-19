@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.friendshiphyun.bookpager.domain.model.Schedule
 import com.friendshiphyun.bookpager.presentation.main.view.manualControl.ManualControl
 import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleDialog
 import com.friendshiphyun.bookpager.presentation.main.view.schedule.ScheduleList
@@ -78,6 +79,8 @@ fun MainScreen(
             ScheduleList(
                 schedules = schedules,
                 onDialog = { showScheduleDialog = true },
+                onToggle = { scheduleViewModel.updateSchedule(Schedule()) },
+                onDelete = { scheduleViewModel.deleteSchedule(Schedule()) },
             )
             HorizontalDivider(color = Colors.dividerColor, thickness = 5.dp)
             ManualControl(

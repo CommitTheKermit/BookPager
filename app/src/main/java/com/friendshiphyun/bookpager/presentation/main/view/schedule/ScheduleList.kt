@@ -20,10 +20,11 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 import java.time.LocalTime
 
 @Composable
-@Preview(showBackground = true)
 fun ScheduleList(
     schedules: List<Schedule> = emptyList(),
-    onDialog: () -> Unit = {}
+    onDialog: () -> Unit = {},
+    onToggle: (Schedule) -> Unit,
+    onDelete: (Schedule) -> Unit,
 ) {
     Column(
         modifier = Modifier.padding(vertical = 15.dp, horizontal = 20.dp)
@@ -55,34 +56,18 @@ fun ScheduleList(
             schedules.forEach { schedule ->
                 SingleScheduleItem(
                     schedule = schedule,
+                    onToggle = {
+                        onToggle(schedule)
+                    },
+                    onDelete = {
+                        onDelete(schedule)
+                    }
                 )
             }
         }
 
     }
 
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun ScheduleListWithItemsPreview() {
-    ScheduleList(
-        schedules = listOf(
-            Schedule(
-                time = LocalTime.of(9, 0),
-                isEnabled = true,
-            ),
-            Schedule(
-                time = LocalTime.of(14, 30),
-                isEnabled = true,
-            ),
-            Schedule(
-                time = LocalTime.of(20, 0),
-                isEnabled = false,
-            )
-        ),
-    )
 }
 
 

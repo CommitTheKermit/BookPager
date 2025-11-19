@@ -58,6 +58,36 @@ class ScheduleViewModel(
         }
     }
 
+    fun updateSchedule(schedule: Schedule) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            repository.updateSchedule(schedule.time.hour, schedule.time.minute, schedule.isEnabled)
+                .onSuccess { message ->
+                    loadSchedules()
+                    _message.value = "일정이 수정 되었습니다" to true
+                }
+                .onFailure { error ->
+                    _message.value = (error.message ?: "일정 추가 실패") to false
+                    _isLoading.value = false
+                }
+        }
+    }
+
+    fun deleteSchedule(schedule: Schedule) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            repository.addSchedule(schedule.time.hour, schedule.time.minute)
+                .onSuccess { message ->
+                    loadSchedules()
+                    _message.value = "일정이 삭제 되었습니다" to true
+                }
+                .onFailure { error ->
+                    _message.value = (error.message ?: "일정 추가 실패") to false
+                    _isLoading.value = false
+                }
+        }
+    }
+
     fun clearMessage() {
         _message.value = null
     }
