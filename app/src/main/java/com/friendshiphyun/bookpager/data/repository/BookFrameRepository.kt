@@ -51,19 +51,20 @@ class BookFrameRepository(
         }
     }
 
-    suspend fun controlMotor(motor: Int, forward: Boolean): Result<String> = withContext(Dispatchers.IO) {
-        try {
-            val response = api.controlMotor(MotorControlRequest(motor, forward))
-            if (response.isSuccessful) {
-                val direction = if (forward) "정방향" else "반대방향"
-                Result.success("모터 ${motor}이(가) ${direction}으로 회전했습니다")
-            } else {
-                Result.failure(Exception("모터 제어 실패: ${response.code()}"))
+    suspend fun controlMotor(motor: Int, forward: Boolean): Result<String> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = api.controlMotor(MotorControlRequest(motor, forward))
+                if (response.isSuccessful) {
+                    val direction = if (forward) "정방향" else "반대방향"
+                    Result.success("모터 ${motor}이(가) ${direction}으로 회전했습니다")
+                } else {
+                    Result.failure(Exception("모터 제어 실패: ${response.code()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
             }
-        } catch (e: Exception) {
-            Result.failure(e)
         }
-    }
 
     /**
      * ESP32로부터 일정 목록 조회
@@ -103,6 +104,42 @@ class BookFrameRepository(
             Result.failure(e)
         }
     }
+
+    /**
+     * 일정 업데이트
+     */
+    suspend fun updateSchedule(hour: Int, minute: Int, enable: Boolean): Result<String> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = api.updateSchedule(ScheduleRequest(hour, minute, enable))
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    Result.success(body?.message ?: "일정이 수정 되었습니다")
+                } else {
+                    Result.failure(Exception("일정 추가 실패: ${response.code()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+
+    /**
+     * 일정 삭제
+     */
+    suspend fun deleteSchedule(hour: Int, minute: Int): Result<String> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = api.deleteSchedule(ScheduleRequest(hour, minute))
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    Result.success(body?.message ?: "일정이 삭제 되었습니다")
+                } else {
+                    Result.failure(Exception("일정 추가 실패: ${response.code()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
 
     /**
      * ScheduleDto를 Schedule 도메인 모델로 변환
