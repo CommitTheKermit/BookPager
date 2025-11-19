@@ -1,6 +1,6 @@
 package com.friendshiphyun.bookpager.data.api.dto.response
 
-data class SetScheduleResponse(
+data class ScheduleResponse(
     val status: String,
     val message: String,
     val hour: Int,

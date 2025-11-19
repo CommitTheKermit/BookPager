@@ -3,7 +3,7 @@ package com.friendshiphyun.bookpager.data.repository
 import com.friendshiphyun.bookpager.data.api.ApiClient
 import com.friendshiphyun.bookpager.data.api.BookFrameApi
 import com.friendshiphyun.bookpager.data.api.dto.request.MotorControlRequest
-import com.friendshiphyun.bookpager.data.api.dto.request.SetScheduleRequest
+import com.friendshiphyun.bookpager.data.api.dto.request.ScheduleRequest
 import com.friendshiphyun.bookpager.data.api.dto.response.ScheduleDto
 import com.friendshiphyun.bookpager.data.api.dto.response.StatusResponse
 import com.friendshiphyun.bookpager.domain.model.Schedule
@@ -92,7 +92,7 @@ class BookFrameRepository(
      */
     suspend fun addSchedule(hour: Int, minute: Int): Result<String> = withContext(Dispatchers.IO) {
         try {
-            val response = api.setSchedule(SetScheduleRequest(hour, minute))
+            val response = api.setSchedule(ScheduleRequest(hour, minute))
             if (response.isSuccessful) {
                 val body = response.body()
                 Result.success(body?.message ?: "일정이 추가되었습니다")

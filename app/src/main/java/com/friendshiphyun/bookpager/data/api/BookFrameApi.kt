@@ -1,9 +1,9 @@
 package com.friendshiphyun.bookpager.data.api
 
 import com.friendshiphyun.bookpager.data.api.dto.request.MotorControlRequest
-import com.friendshiphyun.bookpager.data.api.dto.request.SetScheduleRequest
+import com.friendshiphyun.bookpager.data.api.dto.request.ScheduleRequest
 import com.friendshiphyun.bookpager.data.api.dto.response.MotorControlResponse
-import com.friendshiphyun.bookpager.data.api.dto.response.SetScheduleResponse
+import com.friendshiphyun.bookpager.data.api.dto.response.ScheduleResponse
 import com.friendshiphyun.bookpager.data.api.dto.response.StatusResponse
 import com.friendshiphyun.bookpager.data.api.dto.response.TurnResponse
 import retrofit2.Response
@@ -34,5 +34,5 @@ interface BookFrameApi {
      * 일정 설정
      */
     @POST("setSchedule")
-    suspend fun setSchedule(@Body request: SetScheduleRequest): Response<SetScheduleResponse>
+    suspend fun setSchedule(@Body request: ScheduleRequest): Response<ScheduleResponse>
 }
