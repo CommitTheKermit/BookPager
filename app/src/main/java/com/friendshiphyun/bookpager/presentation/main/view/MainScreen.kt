@@ -28,13 +28,13 @@ import com.friendshiphyun.bookpager.ui.theme.Colors
 @Composable
 fun MainScreen(
     frameViewModel: FrameViewModel = viewModel(),
-    motorControlViewModel: MotorControlViewModel = viewModel(),
-    scheduleViewModel: ScheduleViewModel = viewModel()
+    motorControlViewModel: MotorControlViewModel = viewModel()
 ) {
     val context = LocalContext.current
     var showScheduleDialog by remember { mutableStateOf(false) }
     val uiState by frameViewModel.uiState.collectAsState()
     val motorState by motorControlViewModel.motorState.collectAsState()
+    val scheduleViewModel = frameViewModel.scheduleViewModel
     val schedules by scheduleViewModel.schedules.collectAsState()
     val message by scheduleViewModel.message.collectAsState()
 

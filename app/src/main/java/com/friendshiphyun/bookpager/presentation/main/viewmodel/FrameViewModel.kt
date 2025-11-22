@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class FrameViewModel(
-    private val repository: BookFrameRepository = BookFrameRepository()
+    private val repository: BookFrameRepository = BookFrameRepository(),
+    val scheduleViewModel: ScheduleViewModel = ScheduleViewModel()
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FrameState())
@@ -20,6 +21,7 @@ class FrameViewModel(
     init {
         // 앱 시작 시 ESP32 상태 확인
         checkStatus()
+
     }
 
     fun checkStatus() {
@@ -33,6 +35,8 @@ class FrameViewModel(
                             message = "ESP32 연결됨: ${status.wifi}"
                         )
                     }
+                    // 상태 확인 후 스케줄 로드
+                    scheduleViewModel.loadSchedules()
                 }
                 .onFailure { error ->
                     _uiState.update {
