@@ -39,12 +39,12 @@ interface BookFrameApi {
     /**
      * 일정 업데이트
      */
-    @POST("updateSchedule")
+    @POST("schedule/update")
     suspend fun updateSchedule(@Body request: ScheduleRequest): Response<ScheduleResponse>
 
     /**
      * 일정 업데이트
      */
-    @POST("deleteSchedule")
+    @POST("schedule/delete")
     suspend fun deleteSchedule(@Body request: ScheduleRequest): Response<ScheduleResponse>
 }

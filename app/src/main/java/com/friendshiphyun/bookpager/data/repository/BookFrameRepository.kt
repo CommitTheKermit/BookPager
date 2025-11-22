@@ -116,7 +116,7 @@ class BookFrameRepository(
                     val body = response.body()
                     Result.success(body?.message ?: "일정이 수정 되었습니다")
                 } else {
-                    Result.failure(Exception("일정 추가 실패: ${response.code()}"))
+                    Result.failure(Exception("일정 수정 실패: ${response.code()}"))
                 }
             } catch (e: Exception) {
                 Result.failure(e)
@@ -134,7 +134,7 @@ class BookFrameRepository(
                     val body = response.body()
                     Result.success(body?.message ?: "일정이 삭제 되었습니다")
                 } else {
-                    Result.failure(Exception("일정 추가 실패: ${response.code()}"))
+                    Result.failure(Exception("일정 삭제 실패: ${response.code()}"))
                 }
             } catch (e: Exception) {
                 Result.failure(e)
